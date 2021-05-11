@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:infopelis/models/actores_models.dart';
 import 'package:infopelis/models/pelicula_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -72,7 +73,20 @@ class PeliculasProvider{
   }
 
 
+  Future <List<Actor>> getReparto(String peliId) async{
 
+    final url = Uri.https(_url, '3/movie/$peliId/credits', {
+      'api_key' : _apykey,
+      'language' : _language      
+    });
 
+    final resp = await http.get(url);
 
+    final decodedData = json.decode(resp.body);
+
+    final reparto = new Reparto.fromJsonList(decodedData['cast']);  
+
+    return reparto.actores;    
+
+  }
 }
