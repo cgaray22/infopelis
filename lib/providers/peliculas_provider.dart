@@ -99,5 +99,26 @@ class PeliculasProvider{
     });
 
     return await _procesarResp(url);
+
+
   }
+
+  Future <List<ActorDetail>> getActorDetail(String actorId) async{
+
+    final url = Uri.https(_url, '3/person/$actorId', {
+      'api_key' : _apykey,
+      'language' : _language      
+    });
+
+    final resp = await http.get(url);
+
+    final decodedData = json.decode(resp.body);
+
+    final actor = new Detail.fromJsonList(decodedData);  
+
+    return actor.items;    
+
+  }
+
+  
 }
