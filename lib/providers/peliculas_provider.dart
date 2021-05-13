@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:infopelis/models/actor_credits_models.dart';
+import 'package:infopelis/models/actor_detail_models.dart';
 import 'package:infopelis/models/actores_models.dart';
 import 'package:infopelis/models/pelicula_model.dart';
 import 'dart:convert';
@@ -40,7 +42,6 @@ class PeliculasProvider{
   }
 
   Future <List<Pelicula>>getCartelera() async{   
-
     final url = Uri.https(_url, '3/movie/now_playing', {
       'api_key' : _apykey,
       'language' : _language      
@@ -71,8 +72,6 @@ class PeliculasProvider{
     return resp;
 
   }
-
-
   Future <List<Actor>> getReparto(String peliId) async{
 
     final url = Uri.https(_url, '3/movie/$peliId/credits', {
@@ -103,7 +102,7 @@ class PeliculasProvider{
 
   }
 
-  Future <List<ActorDetail>> getActorDetail(String actorId) async{
+  Future <ActorDetail> getActorDetail(String actorId) async{
 
     final url = Uri.https(_url, '3/person/$actorId', {
       'api_key' : _apykey,
@@ -114,9 +113,8 @@ class PeliculasProvider{
 
     final decodedData = json.decode(resp.body);
 
-    final actor = new Detail.fromJsonList(decodedData);  
-
-    return actor.items;    
+    final actor = new ActorDetail.fromJsonMap(decodedData); 
+    return actor;    
 
   }
 
@@ -131,7 +129,9 @@ class PeliculasProvider{
 
     final decodedData = json.decode(resp.body);
 
-    final credits = new Credits.fromJsonList(decodedData);  
+    print(decodedData);
+
+    final credits = new Credits.fromJsonList(decodedData['cast']);  
 
     return credits.items;    
 

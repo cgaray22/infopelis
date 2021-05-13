@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Detail {
 
   List<ActorDetail> items = new List();
@@ -35,7 +37,7 @@ class ActorDetail {
 
   ActorDetail({
     this.adult,
-    this.alsoKnownAs,
+    // this.alsoKnownAs,
     this.biography,
     this.birthday,
     this.deathday,
@@ -51,18 +53,41 @@ class ActorDetail {
   });
 
   ActorDetail.fromJsonMap( Map<String, dynamic> json ) {
-    alsoKnownAs           = json['also_known_as'];
+    // alsoKnownAs           = json['also_known_as'] ?? '';
     biography             = json['biography'];
-    birthday              = json['birthday'];
-    deathday              = json['deathday'];
-    popularity            = json['popularity'] / 1;
-    profilePath           = json['profile_path'];
-    gender                = json['gender'];
-    homepage              = json['homepage'];
-    id                    = json['id'];
-    imdbId                = json['imdb_id'];
-    knownForDepartment    = json['known_for_department'];
-    name                  = json['name'];
-    placeOfBirth          = json['place_of_birth'];
+    birthday              = json['birthday'] ?? '';
+    deathday              = json['deathday'] ?? '';
+    popularity            = json['popularity'] / 1 ?? '';
+    profilePath           = json['profile_path'] ?? '';
+    gender                = json['gender'] ?? '';
+    homepage              = json['homepage'] ?? '';
+    id                    = json['id'] ?? '';
+    imdbId                = json['imdb_id']?? '';
+    knownForDepartment    = json['known_for_department']?? '';
+    name                  = json['name']?? '';
+    placeOfBirth          = json['place_of_birth']?? '';
   }
+  getProfileImg(){
+
+    if(profilePath == null){
+      return 'https://www.slotcharter.net/wp-content/uploads/2020/02/no-avatar.png';
+    }
+
+  
+    return 'https://image.tmdb.org/t/p/w500/$profilePath';
+
+  }
+
+  getBiografia(){
+
+    if(biography == null){
+      return Text('Biografia no disponible');
+    }
+
+  
+    return biography;
+
+  }
+
+  
 }

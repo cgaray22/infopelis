@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:infopelis/models/actor_credits_models.dart';
+import 'package:infopelis/models/actor_detail_models.dart';
 import 'package:infopelis/models/actores_models.dart';
 import 'package:infopelis/models/pelicula_model.dart';
 import 'package:infopelis/providers/peliculas_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
 
-    final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
-
+    final Pelicula pelicula = ModalRoute.of(context).settings.arguments; 
 
     return Scaffold(
       body: CustomScrollView(
@@ -153,24 +153,29 @@ class PeliculaDetalle extends StatelessWidget {
           viewportFraction: 0.3,
           initialPage: 1
         ),
-        itemBuilder: (context, i) => _actorTarjeta(actores[i]),
+        itemBuilder: (context, i) => _actorTarjeta(context, actores[i]),
         ),
     );
   }
 
-  Widget _actorTarjeta( Actor actor ){
+  Widget _actorTarjeta( BuildContext context, Actor actor ){
 
     return Container(
       child: Column(
         children: <Widget>[
           ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
-                      child: FadeInImage(
+            child: GestureDetector(
+              onTap: (){
+                    Navigator.pushNamed(context, 'actor', arguments: actor);
+              },
+              child: FadeInImage(
               placeholder: AssetImage('assets/img/no-image.jpg'), 
               image: NetworkImage( actor.getProfileImg()),
               height: 150.0,
               fit: BoxFit.cover,
               ),
+                      ),
           ),
           Text(
             actor.name,
