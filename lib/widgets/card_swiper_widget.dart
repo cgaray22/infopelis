@@ -16,8 +16,7 @@ class CardSwiper extends StatelessWidget {
           layout: SwiperLayout.STACK,
           itemWidth: _screenSize.width * 0.7,
           itemHeight: _screenSize.height * 0.5,
-          itemBuilder: (BuildContext context,int index){
-            
+          itemBuilder: (BuildContext context,int index){            
 
             peliculas[index].uniqueId  = '${peliculas[index].id}-tarjeta';
             return Hero(

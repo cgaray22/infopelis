@@ -64,11 +64,6 @@ class ActorDetalle extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   
                   ),
-                // Text(
-                //   actor.name,
-                //   style: Theme.of(context).textTheme.subtitle1,
-                //   overflow: TextOverflow.ellipsis,
-                //   ),
                 Row(children: <Widget> [
                   Icon(Icons.star_border),
                   Text(
@@ -175,23 +170,18 @@ class ActorDetalle extends StatelessWidget {
 
   Widget _peliculaTarjeta(BuildContext context, ActorCredits pelicula){   
 
-    return Container(
-      
+    return Container(      
       child: Column(
         children: <Widget>[   
           ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-              child: GestureDetector(
-                onTap: (){
-                    Navigator.pushNamed(context, 'detalle', arguments: pelicula);
-                    },
+            borderRadius: BorderRadius.circular(20.0),             
                 child: FadeInImage(
                   placeholder: AssetImage('assets/img/no-image.jpg'), 
                   image: NetworkImage( pelicula.getPosterImg()),
                   height: 150.0,
                   fit: BoxFit.cover,
               ),
-                      ),
+            
           ),
           Text(
             pelicula.title,

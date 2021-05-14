@@ -16,7 +16,10 @@ class PeliculasProvider{
 
   int _popularesPage = 0;
 
+  //////// <<<<<
+
   bool _cargando = false;
+  
 
   List<Pelicula> _populares = new List(); 
 
@@ -40,6 +43,8 @@ class PeliculasProvider{
 
       return peliculas.items;
   }
+
+  /////><<<<<
 
   Future <List<Pelicula>>getCartelera() async{   
     final url = Uri.https(_url, '3/movie/now_playing', {
@@ -129,7 +134,7 @@ class PeliculasProvider{
 
     final decodedData = json.decode(resp.body);
 
-    print(decodedData);
+    // print(decodedData);
 
     final credits = new Credits.fromJsonList(decodedData['cast']);  
 
